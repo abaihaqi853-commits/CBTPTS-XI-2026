@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBT PAI XI - SMAN 1 Mojo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Inter & Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.6); }
+        }
+        .glow-effect { animation: pulseGlow 3s infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-800 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">CBT PAI SMAN 1 MOJO</h1>
+                    <p class="text-xs text-slate-400">Kelas XI-5 s.d XI-11 • Kurikulum Merdeka</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+                <button id="navLoginBtn" onclick="openLoginModal()" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold shadow-md transition flex items-center space-x-1.5">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Portal Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+        
+        <!-- Welcome / Registration View -->
+        <div id="viewWelcome" class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 glow-effect">
+            <div class="text-center space-y-2">
+                <span class="inline-block px-3 py-1 bg-brand-500/10 border border-brand-500/30 text-brand-400 rounded-full text-xs font-semibold tracking-wide uppercase">Asesmen Sumatif PAI & Budi Pekerti</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Ujian Berbasis Komputer (CBT)</h2>
+                <p class="text-slate-400 text-sm max-w-md mx-auto">Materi: Berpikir Kritis, Semangat IPTEK, Menepati Janji, Mensyukuri Nikmat, Memelihara Lisan, Menutup Aib & Menghindari Perilaku Menyimpang.</p>
+            </div>
+
+            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA LENGKAP SISWA</label>
+                        <input type="text" id="inputName" placeholder="Contoh: Ahmad Fauzan" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500 text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS</label>
+                        <select id="inputClass" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500 text-white">
+                            <option value="">-- Pilih Kelas XI --</option>
+                            <option value="XI-5">Kelas XI-5</option>
+                            <option value="XI-6">Kelas XI-6</option>
+                            <option value="XI-7">Kelas XI-7</option>
+                            <option value="XI-8">Kelas XI-8</option>
+                            <option value="XI-9">Kelas XI-9</option>
+                            <option value="XI-10">Kelas XI-10</option>
+                            <option value="XI-11">Kelas XI-11</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">NOMOR ABSEN</label>
+                    <input type="number" id="inputAbsen" placeholder="Contoh: 15" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+            </div>
+
+            <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-xl flex items-start space-x-3 text-amber-300 text-xs">
+                <i class="fa-solid fa-triangle-exclamation text-base mt-0.5"></i>
+                <div>
+                    <span class="font-bold">Perhatian:</span> Ujian ini terdiri dari 15 Pilihan Ganda Tunggal, 15 Pilihan Ganda Kompleks, dan 5 Soal Kategori Berbasis HOTS. Waktu pengerjaan 90 menit. Jawaban akan langsung dikirim ke server Google Apps Script secara real-time.
+                </div>
+            </div>
+
+            <button onclick="startExam()" class="w-full py-3 bg-gradient-to-r from-brand-600 to-emerald-500 hover:from-brand-500 hover:to-emerald-400 text-white font-bold rounded-xl shadow-lg shadow-brand-500/25 transition transform active:scale-[0.98]">
+                <i class="fa-solid fa-play mr-2"></i> Mulai Ujian Sekarang
+            </button>
+        </div>
+
+        <!-- Exam View (Hidden Initially) -->
+        <div id="viewExam" class="hidden space-y-4">
+            <!-- Exam Info Header & Timer -->
+            <div class="glass-card rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold" id="badgeStudentInitial">SF</div>
+                    <div>
+                        <h3 id="displayStudentName" class="font-bold text-sm">Ahmad Fauzan</h3>
+                        <p id="displayStudentMeta" class="text-xs text-slate-400">XI-5 • Absen: 15</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-800">
+                    <i class="fa-solid fa-clock text-brand-400"></i>
+                    <div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider">Sisa Waktu</div>
+                        <div id="timerDisplay" class="font-extrabold text-brand-400 text-base">01:30:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Card Container -->
+            <div class="glass-card rounded-2xl p-5 md:p-8 space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <div class="flex items-center space-x-2">
+                        <span id="qCategoryBadge" class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-xs font-bold uppercase">Pilihan Ganda Tunggal</span>
+                        <span class="text-xs text-slate-400" id="qProgressText">Soal 1 dari 35</span>
+                    </div>
+                    <div class="text-xs text-slate-400 font-semibold" id="qCodeTag">HOTS • PAI</div>
+                </div>
+
+                <!-- Question Text -->
+                <div id="questionContainer" class="space-y-4">
+                    <!-- Dynamic Question Rendered Here -->
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+                    <button onclick="prevQuestion()" id="btnPrev" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition disabled:opacity-50">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Sebelumnya
+                    </button>
+                    <div id="questionNavDots" class="hidden md:flex space-x-1 max-w-xs overflow-x-auto py-1">
+                        <!-- Navigation Dots generated dynamically -->
+                    </div>
+                    <button onclick="nextQuestion()" id="btnNext" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold transition">
+                        Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result / Finished View -->
+        <div id="viewResult" class="hidden glass-card rounded-2xl p-6 md:p-8 text-center space-y-6">
+            <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/20 animate-bounce">
+                <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold">Ujian Telah Selesai!</h2>
+                <p class="text-slate-400 text-sm">Alhamdulillah, jawaban Anda telah berhasil direkam ke dalam sistem server SMAN 1 Mojo.</p>
+            </div>
+            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 max-w-md mx-auto space-y-3">
+                <div class="flex justify-between text-sm">
+                    <span class="text-slate-400">Nama Siswa:</span>
+                    <span id="resName" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-slate-400">Kelas / Absen:</span>
+                    <span id="resClass" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between text-sm border-t border-slate-800 pt-3">
+                    <span class="text-slate-400">Status Sinkronisasi:</span>
+                    <span id="resSyncStatus" class="font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i> Tersimpan di Spreadsheet</span>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold transition">
+                <i class="fa-solid fa-rotate-right mr-1"></i> Kembali ke Menu Utama
+            </button>
+        </div>
+
+        <!-- Admin Dashboard View -->
+        <div id="viewAdmin" class="hidden glass-card rounded-2xl p-6 md:p-8 space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-emerald-400"><i class="fa-solid fa-shield-halved mr-2"></i> Portal Administrator CBT</h2>
+                    <p class="text-xs text-slate-400">Kelola pengaturan aplikasi, endpoint Google Apps Script, dan keamanan password.</p>
+                </div>
+                <button onclick="logoutAdmin()" class="px-3 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-lg text-xs font-semibold hover:bg-red-600/30 transition">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Settings Form -->
+                <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-4">
+                    <h3 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-gear mr-1.5 text-brand-400"></i> Pengaturan Web App URL</h3>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Google Apps Script Web App URL</label>
+                        <input type="text" id="adminGasUrl" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-500 text-white">
+                        <p class="text-[10px] text-slate-500 mt-1">Seluruh data jawaban siswa otomatis terkirim ke URL endpoint ini.</p>
+                    </div>
+                    <button onclick="saveGasUrl()" class="w-full py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold transition">
+                        Simpan Konfigurasi URL
+                    </button>
+                </div>
+
+                <!-- Password Reset Form -->
+                <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-4">
+                    <h3 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-key mr-1.5 text-amber-400"></i> Ubah Password Admin</h3>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Password Baru Admin</label>
+                        <input type="password" id="adminNewPassword" placeholder="Masukkan password baru" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-500 text-white">
+                    </div>
+                    <button onclick="changeAdminPassword()" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold transition">
+                        Perbarui Password
+                    </button>
+                </div>
+            </div>
+
+            <!-- Google Apps Script Template Generator -->
+            <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-3">
+                <h3 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-code mr-1.5 text-blue-400"></i> Kode Google Apps Script (Backend Spreadsheet)</h3>
+                <p class="text-xs text-slate-400">Salin kode di bawah ini ke Google Apps Script Spreadsheet Anda dan deploy sebagai Web App (Access: Anyone):</p>
+                <textarea readonly class="w-full h-32 bg-slate-950 border border-slate-800 rounded-lg p-3 font-mono text-[11px] text-slate-300 focus:outline-none">
+function doPost(e) {
+  var data = JSON.parse(e.postData.contents);
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([new Date(), data.nama, data.kelas, data.absen, data.totalNilai, JSON.stringify(data.jawaban)]);
+  return ContentService.createTextOutput(JSON.stringify({"status": "success"})).setMimeType(ContentService.MimeType.JSON);
+}</textarea>
+            </div>
+        </div>
+    </main>
+
+    <footer class="glass-card border-t border-slate-800 py-3 text-center text-xs text-slate-500">
+        &copy; 2026 SMAN 1 Mojo • Mata Pelajaran PAI & Budi Pekerti Kelas XI • All Rights Reserved.
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-2xl p-6 max-w-sm w-full space-y-4 border border-slate-700 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-xl flex items-center justify-center mx-auto text-xl shadow-lg">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="font-bold text-base">Login Admin SMAN 1 Mojo</h3>
+                <p class="text-xs text-slate-400">Masukkan password admin untuk mengakses pengaturan.</p>
+            </div>
+            <div class="space-y-3">
+                <input type="password" id="loginPasswordInput" placeholder="Password Admin" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500 text-white">
+                <button onclick="authenticateAdmin()" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold transition">
+                    Masuk Portal Admin
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMessage" class="text-xs font-semibold">Berhasil menyimpan data!</span>
+    </div>
+
+    <script>
+        // Question Bank - 35 Total Questions (15 PG Tunggal, 15 PG Kompleks, 5 Kategori HOTS)
+        const questions = [
+            // --- BAGIAN 1: PILIHAN GANDA TUNGGAL (1-15) ---
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Berpikir Kritis (QS. Ali Imran: 190-191)',
+                question: 'Perhatikan penggalan ayat QS. Ali Imran: 190: "Inna fii khalqi samawaati wal ardhi wa ikhtilaafil laili wan nahari la aayaatin li ulil albaab." Makna inti dari ulil albab dalam ayat tersebut adalah...',
+                options: [
+                    'A. Orang yang cerdas dalam bidang teknologi digital dan sains',
+                    'B. Orang yang memiliki akal sehat yang selalu merenungkan ciptaan Allah SWT dalam segala kondisi',
+                    'C. Orang yang gemar berdiskusi masalah sosial dan politik modern',
+                    'D. Ulama yang menghafal Al-Qur`an dan hadis secara mendalam',
+                    'E. Cendekiawan yang ahli dalam bidang astronomi dan fisika kuantum'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Semangat Mencintai IPTEK',
+                question: 'Perkembangan ilmu pengetahuan dan teknologi (IPTEK) di era modern menuntut umat Islam untuk bersikap proaktif. Sikap yang paling tepat bagi seorang pelajar muslim dalam menghadapi arus globalisasi IPTEK adalah...',
+                options: [
+                    'A. Menerima seluruh produk teknologi tanpa filter demi kemajuan zaman',
+                    'B. Menolak seluruh teknologi barat karena dianggap tidak sesuai dengan nilai Islami',
+                    'C. Memanfaatkan IPTEK sebagai sarana mendekatkan diri kepada Allah serta menebar kemaslahatan',
+                    'D. Mempelajari IPTEK hanya sekadar untuk lulus ujian sekolah semata',
+                    'E. Mengabaikan IPTEK dan fokus pada ilmu agama tradisional saja'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Memenuhi Janji',
+                question: 'Janji adalah utang yang harus ditunaikan. Sifat munafik akan melekat pada diri seseorang apabila ia tidak menepati janji. Dampak negatif utama dari seseorang yang sering mengingkari janji dalam kehidupan sosial adalah...',
+                options: [
+                    'A. Kehilangan kepercayaan (trust) dari orang lain dan rusaknya relasi sosial',
+                    'B. Mendapatkan keuntungan materi yang berlimpah dari orang yang diperdaya',
+                    'C. Semakin disegani dan dihormati karena dianggap memiliki pendirian fleksibel',
+                    'D. Terhindar dari berbagai macam tanggung jawab berat di masyarakat',
+                    'E. Menjadi pusat perhatian di lingkungan pergaulan sekolah'
+                ],
+                answer: 0
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Mensyukuri Nikmat',
+                question: 'Mensyukuri nikmat Allah SWT tidak cukup hanya dengan mengucapkan alhamdulillah, melainkan harus dibuktikan dengan perbuatan. Bentuk syukur bil-amal (perbuatan) atas nikmat kesehatan jasmani yang diberikan Allah adalah...',
+                options: [
+                    'A. Menggunakan tubuh untuk bekerja lembur tanpa mengenal waktu istirahat',
+                    'B. Memanfaatkan kesehatan untuk beribadah kepada Allah serta berbuat kebaikan bagi sesama',
+                    'C. Memamerkan bentuk fisik yang ideal di media sosial untuk mendapatkan pujian',
+                    'D. Menjaga pola makan secara berlebihan tanpa peduli orang lain',
+                    'E. Menyimpan tenaga agar tidak kelelahan dalam aktivitas sehari-hari'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Memelihara Lisan',
+                question: 'Lisan adalah nikmat besar, namun sekaligus anggota tubuh yang paling banyak menjerumuskan manusia ke dalam kemaksiatan. Di era media sosial, gibah dan fitnah sering disamarkan dalam bentuk komentar pedas. Hukum asal menyebarkan berita yang belum jelas kebenarannya (tabayyun) adalah...',
+                options: [
+                    'A. Mubah jika tujuannya untuk hiburan semata',
+                    'B. Sunnah jika dibagikan di grup tertutup',
+                    'C. Haram karena berpotensi menimbulkan fitnah dan permusuhan',
+                    'D. Makruh jika tidak merugikan pihak manapun secara langsung',
+                    'E. Diperbolehkan demi kebebasan berpendapat di ruang publik'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Menutupi Aib Orang Lain',
+                question: 'Rasulullah SAW bersabda bahwa barangsiapa yang menutupi aib seorang Muslim, maka Allah akan menutupi aibnya di dunia dan akhirat. Sikap bijak ketika kita tanpa sengaja mengetahui keburukan atau aib teman dekat kita adalah...',
+                options: [
+                    'A. Menceritakannya kepada sahabat terdekat agar mereka ikut berhati-hati',
+                    'B. Menjadikannya bahan candaan saat berkumpul di kantin sekolah',
+                    'C. Segera menutupinya, menasihati secara baik jika memungkinkan, dan tidak menyebarkannya',
+                    'D. Mempostingnya secara anonim di akun media sosial sekolah',
+                    'E. Mendiamkan dan merekamnya sebagai bukti jaga-jaga'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Menghindari Perkelahian Pelajar',
+                question: 'Perkelahian antar pelajar (tawuran) sering kali dipicu oleh masalah sepele dan ego kelompok yang tinggi. Ditinjau dari ajaran Islam, tawuran bertentangan dengan prinsip...',
+                options: [
+                    'A. Ukhuwah Islamiyah dan penjagaan terhadap jiwa (hifzh an-nafs)',
+                    'B. Kompetisi dalam kebaikan (fastabiqul khairat)',
+                    'C. Kebebasan berekspresi generasi muda masa kini',
+                    'D. Semangat patriotisme membela almamater sekolah',
+                    'E. Ketahanan fisik dan keberanian remaja'
+                ],
+                answer: 0
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Bahaya Miras dan Narkoba',
+                question: 'Minuman keras (khamr) dan narkoba diharamkan secara tegas dalam Islam karena merusak akal sehat. Alasan utama zat-zat tersebut dikategorikan sebagai ummul khaba`ist (induk dari segala keburukan) adalah...',
+                options: [
+                    'A. Harganya yang sangat mahal dan menguras kantong pelajar',
+                    'B. Menghilangkan kesadaran sehingga seseorang dapat melakukan kejahatan tanpa kendali',
+                    'C. Membuat badan menjadi cepat lelah dan rentan terkena penyakit kulit',
+                    'D. Menyebabkan seseorang dijauhi oleh guru di lingkungan sekolah',
+                    'E. Melanggar tata tertib hukum positif negara Republik Indonesia'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Berpikir Kritis',
+                question: 'Dalam QS. Ali Imran ayat 191, orang yang berakal (ulil albab) selalu mengingat Allah baik ketika berdiri, duduk, maupun berbaring. Hubungan antara dzikrullah dengan aktivitas berpikir ilmiah adalah...',
+                options: [
+                    'A. Dzikir menghambat proses analisis data ilmiah di laboratorium',
+                    'B. Dzikir dan pikir berjalan seiring; dzikir melandasi kesadaran spiritual, sedangkan pikir mengoptimalkan kerja akal',
+                    'C. Keduanya merupakan aktivitas yang berdiri sendiri tanpa ada kaitan',
+                    'D. Berpikir ilmiah lebih utama daripada berdzikir mengingat Allah',
+                    'E. Dzikir hanya dilakukan setelah penelitian selesai dilakukan'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Semangat Mencintai IPTEK',
+                question: 'Penemuan teknologi modern seperti internet dan kecerdasan buatan (AI) bagaikan pisau bermata dua. Sikap kritis seorang pelajar muslim dalam memanfaatkan teknologi tersebut adalah...',
+                options: [
+                    'A. Menggunakan seluruh fitur tanpa batasan waktu',
+                    'B. Memanfaatkan untuk peningkatan prestasi akademik dan dakwah, serta menghindari konten negatif',
+                    'C. Menghindari internet sepenuhnya karena banyak mengandung fitnah',
+                    'D. Menggunakan hanya untuk bermain gim online bersama teman',
+                    'E. Menjual akses teknologi kepada pihak yang tidak bertanggung jawab'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Memenuhi Janji',
+                question: 'Seorang pemimpin atau ketua kelas di SMAN 1 Mojo yang terpilih telah mengucapkan sumpah dan janji jabatan. Konsekuensi moral dan spiritual bagi dirinya jika mengabaikan janji tersebut adalah...',
+                options: [
+                    'A. Hanya mendapat teguran ringan dari wali kelas',
+                    'B. Mempertanggungjawabkan amanah tersebut di hadapan Allah SWT di hari kiamat',
+                    'C. Kehilangan jabatan tanpa ada sanksi moral lainnya',
+                    'D. Dianggap biasa saja karena jabatan adalah hal yang lumrah',
+                    'E. Mendapatkan simpati dari teman sekelasnya'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Memelihara Lisan',
+                question: 'Dampak negatif penyebaran hoaks (berita bohong) di media sosial sangat destruktif bagi keharmonisan masyarakat. Langkah preventif Islami yang harus diambil saat menerima informasi sensasional di grup WhatsApp adalah...',
+                options: [
+                    'A. Langsung membagikan ke grup lain agar orang lain segera tahu',
+                    'B. Melakukan tabayyun (klarifikasi dan verifikasi kebenaran) terlebih dahulu',
+                    'C. Mengabaikan dan menghapus semua aplikasi chat',
+                    'D. Membalas pesan tersebut dengan hujatan kepada pengirimnya',
+                    'E. Menyimpan informasi tersebut untuk kepentingan pribadi'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Menghindari Perilaku Menyimpang',
+                question: 'Penyalahgunaan narkoba di kalangan remaja sering kali berawal dari pergaulan bebas dan rasa penasaran yang keliru. Solusi preventif terbaik dari sudut pandang agama untuk mencegah hal ini adalah...',
+                options: [
+                    'A. Membatasi pergaulan secara total dan menutup diri dari lingkungan',
+                    'B. Memperkuat keimanan, ketakwaan, serta memilih lingkungan pertemanan yang positif dan saleh',
+                    'C. Mengikuti pelatihan bela diri tingkat tinggi',
+                    'D. Menghindari sekolah dan belajar secara mandiri di rumah',
+                    'E. Bergantung sepenuhnya pada pengawasan ketat pihak kepolisian'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Berpikir Kritis',
+                question: 'Ciri utama orang yang memiliki semangat berpikir kritis terhadap fenomena alam semesta adalah...',
+                options: [
+                    'A. Menerima segala informasi apa adanya tanpa pernah melakukan pengecekan',
+                    'B. Selalu bertanya, meneliti, dan mengambil hikmah kebesaran Sang Pencipta dari setiap ciptaan-Nya',
+                    'C. Menolak teori sains modern yang tidak disebutkan secara tekstual dalam kitab suci',
+                    'D. Mengandalkan asumsi pribadi dalam memutuskan suatu perkara',
+                    'E. Berdiskusi hanya untuk mencari kelemahan argumen orang lain'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Tunggal',
+                code: 'Materi: Mensyukuri Nikmat',
+                question: 'Nikmat waktu luang sering kali dilalaikan oleh manusia, sebagaimana sabda Nabi SAW tentang dua nikmat yang banyak melalaikan. Cara terbaik mensyukuri nikmat waktu luang bagi seorang pelajar adalah...',
+                options: [
+                    'A. Tidur sepanjang hari untuk memulihkan stamina',
+                    'B. Menggunakan waktu untuk kegiatan positif seperti belajar, membaca literatur, dan membantu orang tua',
+                    'C. Menghabiskan waktu di pusat perbelanjaan setiap hari',
+                    'D. Bermain gim digital sampai larut malam tanpa batas',
+                    'E. Menunda-nunda tugas sekolah hingga batas akhir pengumpulan'
+                ],
+                answer: 1
+            },
+
+            // --- BAGIAN 2: PILIHAN GANDA KOMPLEKS (16-30) ---
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Berpikir Kritis & IPTEK (HOTS)',
+                question: 'Pilihlah DUA (2) sikap yang mencerminkan integrasi antara berpikir kritis dan pengembangan IPTEK dalam pandangan Islam:<br>1. Mengembangkan riset teknologi demi kemaslahatan umat manusia.<br>2. Menolak teknologi karena dikhawatirkan membawa budaya asing.<br>3. Menganalisis fenomena alam dengan metode ilmiah berlandaskan tauhid.<br>4. Menggunakan kecanggihan teknologi untuk menyebarkan berita bohong.',
+                options: [
+                    'A. Pernyataan 1 dan 2',
+                    'B. Pernyataan 1 dan 3',
+                    'C. Pernyataan 2 dan 4',
+                    'D. Pernyataan 3 dan 4',
+                    'E. Pernyataan 1 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Karakter Ulil Albab',
+                question: 'Manakah di antara perilaku berikut yang merupakan ciri-ciri orang yang memiliki sifat Ulil Albab berdasarkan QS. Ali Imran: 190-191?<br>1. Senantiasa mengingat Allah dalam setiap keadaan.<br>2. Merenungkan penciptaan langit dan bumi secara mendalam.<br>3. Bersikap sombong atas ilmu pengetahuan yang dikuasainya.<br>4. Menyadari bahwa tidak ada satupun ciptaan Allah yang sia-sia.',
+                options: [
+                    'A. 1, 2, dan 3 benar',
+                    'B. 1, 3, dan 4 benar',
+                    'C. 1, 2, dan 4 benar',
+                    'D. 2, 3, dan 4 benar',
+                    'E. Semua pernyataan benar'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Konsekuensi Memenuhi Janji',
+                question: 'Apa saja akibat buruk bagi seseorang yang terbiasa melanggar janji dalam kehidupan sehari-hari?<br>1. Kehilangan kredibilitas dan kepercayaan publik.<br>2. Menjadi teladan bagi generasi muda di sekolah.<br>3. Mendapatkan dosa sosial dan ancaman kemunafikan.<br>4. Disukai oleh rekan kerja karena fleksibilitasnya.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 4',
+                    'D. 3 dan 4',
+                    'E. 1 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Implementasi Syukur Nikmat',
+                question: 'Bentuk nyata mensyukuri nikmat harta kekayaan menurut ajaran Islam meliputi:<br>1. Mengeluarkan zakat, infak, dan sedekah secara rutin.<br>2. Menggunakan harta untuk berfoya-foya demi prestise.<br>3. Memanfaatkan harta untuk hal-hal yang diridhai Allah SWT.<br>4. Menimbun harta agar tidak berkurang jumlahnya.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 4',
+                    'D. 3 dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Menjaga Lisan di Era Digital',
+                question: 'Aktivitas bermedia sosial yang sesuai dengan etika memelihara lisan dalam Islam adalah:<br>1. Menyaring informasi sebelum membagikannya (tabayyun).<br>2. Memberikan komentar yang membangun dan santun.<br>3. Menyindir orang lain melalui fitur story agar tersindir.<br>4. Menghindari ujaran kebencian (hate speech) di kolom komentar.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Adab Menutupi Aib',
+                question: 'Manakah tindakan yang mencerminkan sikap menutupi aib sesama muslim?<br>1. Menegur teman yang berbuat salah secara empat mata dengan santun.<br>2. Menceritakan keburukan teman kepada orang lain dengan dalih curhat.<br>3. Tidak membongkar rahasia pribadi teman yang dipercayakan kepada kita.<br>4. Menasihati di depan umum agar yang bersangkutan jera.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 3',
+                    'D. 2 dan 4',
+                    'E. 3 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Solusi Pencegahan Tawuran',
+                question: 'Upaya preventif yang efektif untuk menanggulangi perkelahian antar pelajar di tingkat satuan pendidikan adalah:<br>1. Mengadakan kegiatan ekstrakurikuler kolaboratif antar sekolah.<br>2. Memperketat pengawasan dan memberikan sanksi tegas.<br>3. Membiarkan kelompok pelajar menyelesaikan masalahnya sendiri.<br>4. Mengadakan pembinaan mental keagamaan dan konseling sebaya.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Bahaya Narkoba',
+                question: 'Dampak destruktif penyalahgunaan narkoba bagi masa depan pelajar meliputi:<br>1. Kerusakan permanen pada fungsi sistem saraf pusat dan otak.<br>2. Penurunan prestasi akademik dan putus sekolah.<br>3. Meningkatnya konsentrasi dan kreativitas belajar.<br>4. Terjerumus ke dalam lingkaran tindakan kriminal.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Berpikir Kritis & Sains',
+                question: 'Sikap seorang ilmuwan muslim dalam memandang teori-teori sains modern adalah:<br>1. Menerima teori sains yang terbukti kebenarannya serta menjadikannya sarana mempertebal iman.<br>2. Menolak seluruh sains modern karena bersumber dari barat.<br>3. Mengintegrasikan dalil naqli (Al-Qur`an/Hadis) dengan dalil ‘aqli (sains).<br>4. Menganggap ilmu agama terpisah secara total dari ilmu sains.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 3',
+                    'D. 2 dan 4',
+                    'E. 3 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Semangat Literasi IPTEK',
+                question: 'Penerapan semangat literasi digital yang Islami di kalangan pelajar SMAN 1 Mojo dapat diwujudkan melalui:<br>1. Membuat konten positif dan edukatif di media sosial.<br>2. Menyebarkan meme ejekan kepada sekolah lain.<br>3. Menggunakan AI dan internet untuk riset tugas sekolah.<br>4. Mengakses situs terlarang saat jam pelajaran kosong.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 3',
+                    'D. 3 dan 4',
+                    'E. 1 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Karakter Sifat Amanah',
+                question: 'Manakah perilaku yang menunjukkan keteladanan sifat amanah dalam kehidupan sehari-hari?<br>1. Mengembalikan sisa uang belanjaan kepada orang tua dengan jujur.<br>2. Mengerjakan ujian sekolah dengan mengandalkan kemampuan sendiri.<br>3. Menggunakan fasilitas laboratorium komputer sekolah dengan hati-hati.<br>4. Mengambil barang milik teman yang tertinggal di laci meja.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 0
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Etika Sosial Islam',
+                question: 'Prinsip-prinsip utama dalam pergaulan remaja muslim untuk menghindari perilaku menyimpang adalah:<br>1. Menjaga pandangan (ghadhul bashar).<br>2. Menghindari ikhtilat (campur baur tanpa batas).<br>3. Bergaul tanpa aturan agar terkesan modern.<br>4. Menjunjung tinggi nilai kesopanan dan akhlakul karimah.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Mensyukuri Nikmat Waktu',
+                question: 'Tanda-tanda seseorang mensyukuri nikmat waktu dalam aktivitas belajar adalah:<br>1. Disiplin waktu dan tidak menunda tugas.<br>2. Memanfaatkan waktu istirahat untuk kegiatan bermanfaat.<br>3. Begadang setiap malam hanya untuk bermain gim.<br>4. Menyusun jadwal harian yang seimbang antara ibadah dan belajar.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, dan 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Menghindari Ghibah',
+                question: 'Dampak buruk perbuatan ghibah (membicarakan aib orang lain) di lingkungan sekolah adalah:<br>1. Menimbulkan rasa saling curiga antar siswa.<br>2. Mempererat kebersamaan kelompok pertemanan.<br>3. Menghapus pahala kebaikan seseorang.<br>4. Menciptakan iklim belajar yang kondusif.',
+                options: [
+                    'A. 1 dan 2',
+                    'B. 1 dan 3',
+                    'C. 2 dan 3',
+                    'D. 2 dan 4',
+                    'E. 3 dan 4'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Pilihan Ganda Kompleks',
+                code: 'Materi: Integrasi PAI & Karakter',
+                question: 'Nilai-nilai luhur yang dapat dipetik dari materi pencegahan perkelahian pelajar, miras, dan narkoba adalah:<br>1. Memiliki ketahanan mental dan spiritual yang tangguh.<br>2. Menyadari bahwa diri sendiri adalah makhluk yang mulia.<br>3. Mengikuti tren pergaulan bebas demi diakui teman sebaya.<br>4. Menjadi agen perubahan positif di lingkungan sekolah.',
+                options: [
+                    'A. 1, 2, dan 3',
+                    'B. 1, 2, dan 4',
+                    'C. 2, 3, dan 4',
+                    'D. 1, 3, and 4',
+                    'E. Semua benar'
+                ],
+                answer: 1
+            },
+
+            // --- BAGIAN 3: SOAL KATEGORI BERBASIS HOTS (31-35) ---
+            {
+                type: 'single',
+                category: 'Soal Kategori HOTS',
+                code: 'Studi Kasus 1: Berpikir Kritis & Sains',
+                question: '<b>Kasus:</b> Seorang siswa bernama Zaid menemukan artikel ilmiah di internet yang menyatakan bahwa alam semesta terbentuk secara kebetulan tanpa ada pencipta. Sebagai pelajar yang memahami QS. Ali Imran: 190-191, tindakan analisis kritis yang paling tepat dilakukan oleh Zaid adalah...',
+                options: [
+                    'A. Langsung mempercayai artikel tersebut karena bersumber dari jurnal internasional',
+                    'B. Menolak sains secara mutlak dan berhenti membaca internet',
+                    'C. Menganalisis data ilmiah tersebut dengan akal sehat, lalu menyimpulkan bahwa kompleksitas alam semesta justru membuktikan kebesaran Allah Sang Pencipta',
+                    'D. Membagikan artikel tersebut ke media sosial untuk memancing perdebatan',
+                    'E. Mengabaikan informasi sains karena tidak penting bagi kehidupan akhirat'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Soal Kategori HOTS',
+                code: 'Studi Kasus 2: Etika Bermedia Sosial',
+                question: '<b>Kasus:</b> Fatimah melihat video di TikTok yang memperlihatkan salah satu guru di sekolahnya sedang mengalami insiden jatuh di kantin, dan video tersebut ramai ditertawakan netizen. Sikap Fatimah yang mencerminkan pemeliharaan lisan dan penutupan aib adalah...',
+                options: [
+                    'A. Ikut memberikan komentar lucu agar videonya masuk FYP',
+                    'B. Menyimpan video tersebut untuk dikirimkan ke grup WhatsApp kelas',
+                    'C. Melaporkan (report) konten tersebut, tidak ikut menyebarkannya, serta mengingatkan pengunggah untuk menghapusnya',
+                    'D. Menandai akun guru yang bersangkutan agar melihat komentar orang',
+                    'E. Mendiamkan saja karena bukan urusan pribadinya'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Soal Kategori HOTS',
+                code: 'Studi Kasus 3: Penyelesaian Konflik Pelajar',
+                question: '<b>Kasus:</b> Terjadi kesalahpahaman antara dua kelompok ekstrakurikuler di SMAN 1 Mojo yang nyaris berujung pada bentrokan fisik di luar gerbang sekolah. Sebagai pengurus OSIS yang beriman, langkah preventif terbaik yang harus diambil adalah...',
+                options: [
+                    'A. Memprovokasi kelompok lawan agar perkelahian segera diselesaikan',
+                    'B. Melaporkan kepada pihak kepolisian tanpa memberitahu pihak sekolah',
+                    'C. Melakukan mediasi damai berbasis kekeluargaan (ishlah) serta melibatkan pembina OSIS dan guru BK',
+                    'D. Menonton dari kejauhan tanpa ikut campur tangan',
+                    'E. Membeli peralatan perlindungan diri untuk persiapan'
+                ],
+                answer: 2
+            },
+            {
+                type: 'single',
+                category: 'Soal Kategori HOTS',
+                code: 'Studi Kasus 4: Komitmen Janji & Amanah',
+                question: '<b>Kasus:</b> Umar berjanji kepada kelompok belajarnya untuk menyelesaikan bab makalah biografi tokoh Islam tepat pada hari Kamis. Namun, pada hari Rabu malam, Umar diundang menghadiri acara keluarga yang cukup penting. Keputusan bijak yang menunjukkan integritas Umar adalah...',
+                options: [
+                    'A. Membatalkan janji kepada kelompok belajar tanpa konfirmasi',
+                    'B. Menyelesaikan tugas makalah tersebut terlebih dahulu atau berkomunikasi secara proaktif meminta penyesuaian waktu kepada kelompok dengan alasan yang jelas',
+                    'C. Menyuruh teman sekelompok membuat bagian miliknya',
+                    'D. Datang ke acara keluarga dan mengabaikan tugas makalah',
+                    'E. Membuat alasan palsu sakit agar dimaklumi'
+                ],
+                answer: 1
+            },
+            {
+                type: 'single',
+                category: 'Soal Kategori HOTS',
+                code: 'Studi Kasus 5: Mensyukuri Nikmat di Era Digital',
+                question: '<b>Kasus:</b> Di era digital saat ini, banyak remaja kecanduan gim online hingga melalaikan kewajiban salat 5 waktu dan belajar. Refleksi spiritual dari konsep syukur nikmat terhadap kasus ini adalah...',
+                options: [
+                    'A. Gim online adalah bentuk kemajuan IPTEK yang wajib dinikmati tanpa batas',
+                    'B. Kecanduan gim menunjukkan kegagalan seseorang dalam mensyukuri nikmat waktu dan kesehatan yang diberikan Allah SWT',
+                    'C. Waktu luang bebas digunakan untuk apa saja asalkan tidak merugikan orang lain',
+                    'D. Pemerintah harus melarang seluruh gim digital di Indonesia',
+                    'E. Salat dapat diqada kapan saja setelah selesai bermain gim'
+                ],
+                answer: 1
+            }
+        ];
+
+        // App State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let studentData = { name: '', kelas: '', absen: '' };
+        let timerInterval = null;
+        let timeRemaining = 90 * 60; // 90 minutes in seconds
+        let adminPassword = localStorage.getItem('cbt_admin_password') || 'mojo2026';
+        let gasEndpointUrl = localStorage.getItem('cbt_gas_url') || 'https://script.google.com/macros/s/AKfycbzQ7UXYR6HPzMj-I6IJN9KnYH_vdhx_Fv6VqfKKnBNTpEdDQZOEDR1nuPEZfp0tbFM/exec';
+
+        // DOM Elements
+        const viewWelcome = document.getElementById('viewWelcome');
+        const viewExam = document.getElementById('viewExam');
+        const viewResult = document.getElementById('viewResult');
+        const viewAdmin = document.getElementById('viewAdmin');
+        const loginModal = document.getElementById('loginModal');
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+            
+            msgEl.textContent = message;
+            if (type === 'success') {
+                iconEl.className = 'fa-solid fa-circle-check text-emerald-400';
+            } else {
+                iconEl.className = 'fa-solid fa-triangle-exclamation text-amber-400';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Start Exam
+        function startExam() {
+            const name = document.getElementById('inputName').value.trim();
+            const kelas = document.getElementById('inputClass').value;
+            const absen = document.getElementById('inputAbsen').value.trim();
+
+            if (!name || !kelas || !absen) {
+                showToast('Harap lengkapi Nama, Kelas, dan Nomor Absen!', 'warning');
+                return;
+            }
+
+            studentData = { name, kelas, absen };
+            
+            // Update UI Header
+            document.getElementById('displayStudentName').textContent = name;
+            document.getElementById('displayStudentMeta').textContent = `${kelas} • Absen: ${absen}`;
+            document.getElementById('badgeStudentInitial').textContent = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            viewWelcome.classList.add('hidden');
+            viewExam.classList.remove('hidden');
+
+            renderQuestion();
+            renderNavDots();
+            startTimer();
+        }
+
+        // Timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                    return;
+                }
+                timeRemaining--;
+                const hours = Math.floor(timeRemaining / 3600);
+                const minutes = Math.floor((timeRemaining % 3600) / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timerDisplay').textContent = 
+                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Render Question
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('qCategoryBadge').textContent = q.category;
+            document.getElementById('qProgressText').textContent = `Soal ${currentQuestionIndex + 1} dari ${questions.length}`;
+            document.getElementById('qCodeTag').textContent = q.code;
+
+            const container = document.getElementById('questionContainer');
+            let html = `<div class="text-sm md:text-base font-medium leading-relaxed text-slate-200">${q.question}</div>`;
+            html += `<div class="space-y-3 pt-2">`;
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentQuestionIndex] === idx;
+                html += `
+                    <label onclick="selectAnswer(${idx})" class="flex items-start space-x-3 p-3.5 rounded-xl border transition cursor-pointer ${isSelected ? 'bg-brand-600/20 border-brand-500 text-white' : 'bg-slate-900/40 border-slate-800 text-slate-300 hover:bg-slate-800/60'}">
+                        <input type="radio" name="qOption" ${isSelected ? 'checked' : ''} class="mt-1 text-brand-500 focus:ring-brand-500">
+                        <span class="text-xs md:text-sm leading-normal">${opt}</span>
+                    </label>
+                `;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+
+            // Buttons state
+            document.getElementById('btnPrev').disabled = currentQuestionIndex === 0;
+            const btnNext = document.getElementById('btnNext');
+            if (currentQuestionIndex === questions.length - 1) {
+                btnNext.innerHTML = `Selesai & Kirim <i class="fa-solid fa-paper-plane ml-1"></i>`;
+                btnNext.className = "px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition";
+            } else {
+                btnNext.innerHTML = `Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>`;
+                btnNext.className = "px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold transition";
+            }
+
+            updateNavDots();
+        }
+
+        function selectAnswer(idx) {
+            userAnswers[currentQuestionIndex] = idx;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                confirmSubmit();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function goToQuestion(idx) {
+            currentQuestionIndex = idx;
+            renderQuestion();
+        }
+
+        function renderNavDots() {
+            const navDots = document.getElementById('questionNavDots');
+            let html = '';
+            questions.forEach((_, idx) => {
+                html += `<button onclick="goToQuestion(${idx})" id="dot-${idx}" class="w-7 h-7 rounded-lg text-xs font-bold border border-slate-700 bg-slate-800 text-slate-400 hover:bg-slate-700 transition">${idx + 1}</button>`;
+            });
+            navDots.innerHTML = html;
+        }
+
+        function updateNavDots() {
+            questions.forEach((_, idx) => {
+                const dot = document.getElementById(`dot-${idx}`);
+                if (!dot) return;
+                if (idx === currentQuestionIndex) {
+                    dot.className = "w-7 h-7 rounded-lg text-xs font-bold border border-brand-500 bg-brand-600 text-white shadow-md shadow-brand-500/30";
+                } else if (userAnswers[idx] !== null) {
+                    dot.className = "w-7 h-7 rounded-lg text-xs font-bold border border-emerald-500/50 bg-emerald-950/50 text-emerald-400";
+                } else {
+                    dot.className = "w-7 h-7 rounded-lg text-xs font-bold border border-slate-700 bg-slate-800 text-slate-400 hover:bg-slate-700";
+                }
+            });
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`Masih ada ${unanswered} soal yang belum terjawab. Apakah Anda yakin ingin menyelesaikan ujian?`)) {
+                    return;
+                }
+            } else {
+                if (!confirm("Apakah Anda yakin ingin mengirimkan jawaban ujian?")) {
+                    return;
+                }
+            }
+            submitExam();
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            // Calculate score (simple calculation for demonstration)
+            let correctCount = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questions[idx].answer) correctCount++;
+            });
+            const finalScore = Math.round((correctCount / questions.length) * 100);
+
+            // Prepare Payload for Google Apps Script
+            const payload = {
+                nama: studentData.name,
+                kelas: studentData.kelas,
+                absen: studentData.absen,
+                totalNilai: finalScore,
+                jawaban: userAnswers
+            };
+
+            // Send to Google Apps Script if URL is configured
+            if (gasEndpointUrl) {
+                fetch(gasEndpointUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.log('GAS Sync error:', err));
+            }
+
+            // Switch to Result View
+            viewExam.classList.add('hidden');
+            viewResult.classList.remove('hidden');
+
+            document.getElementById('resName').textContent = studentData.name;
+            document.getElementById('resClass').textContent = `${studentData.kelas} • No. ${studentData.absen}`;
+            document.getElementById('resSyncStatus').innerHTML = gasEndpointUrl ? 
+                `<i class="fa-solid fa-circle-check mr-1"></i> Berhasil Disinkron ke Spreadsheet` : 
+                `<i class="fa-solid fa-triangle-exclamation mr-1 text-amber-400"></i> Mode Offline (URL GAS belum diatur)`;
+        }
+
+        // Admin Portal Functions
+        function openLoginModal() {
+            loginModal.classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.add('hidden');
+            document.getElementById('loginPasswordInput').value = '';
+        }
+
+        function authenticateAdmin() {
+            const pass = document.getElementById('loginPasswordInput').value;
+            if (pass === adminPassword) {
+                closeLoginModal();
+                viewWelcome.classList.add('hidden');
+                viewAdmin.classList.remove('hidden');
+                document.getElementById('adminGasUrl').value = gasEndpointUrl;
+                showToast('Berhasil masuk sebagai Admin!', 'success');
+            } else {
+                showToast('Password Admin salah!', 'warning');
+            }
+        }
+
+        function logoutAdmin() {
+            viewAdmin.classList.add('hidden');
+            viewWelcome.classList.remove('hidden');
+            showToast('Keluar dari portal admin', 'success');
+        }
+
+        function saveGasUrl() {
+            const url = document.getElementById('adminGasUrl').value.trim();
+            gasEndpointUrl = url;
+            localStorage.setItem('cbt_gas_url', url);
+            showToast('URL Google Apps Script berhasil disimpan!', 'success');
+        }
+
+        function changeAdminPassword() {
+            const newPass = document.getElementById('adminNewPassword').value.trim();
+            if (!newPass || newPass.length < 4) {
+                showToast('Password baru minimal 4 karakter!', 'warning');
+                return;
+            }
+            adminPassword = newPass;
+            localStorage.setItem('cbt_admin_password', newPass);
+            document.getElementById('adminNewPassword').value = '';
+            showToast('Password admin berhasil diperbarui!', 'success');
+        }
+    </script>
+</body>
+</html>
